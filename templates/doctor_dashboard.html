@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %}Portal mÃ©dico Â· MediCita VE{% endblock %} {% block content %}
+Portal mÃ©dico
+
+Agenda visual mÃ¡s limpia, moderna y preparada para escalar a backend real.
+
+Abrir agenda completa
+{{ stats.consultas_hoy }}Consultas hoy
+{{ stats.pacientes_nuevos }}Pacientes nuevos
+{{ stats.ocupacion }}OcupaciÃ³n
+{{ stats.medicos_activos }}MÃ©dicos activos
+Agenda de hoy
+
+{% for item in today_schedule %}
+{{ item.name }} {{ item.type }}
+{{ item.time }}  Ver ficha
+{% endfor %}
+Acciones rÃ¡pidas
+
+Confirmar citas  Enviar recordatorios  Abrir teleconsulta  Revisar historias
+{% endblock %}
