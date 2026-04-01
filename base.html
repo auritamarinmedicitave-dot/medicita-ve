@@ -1,1 +1,12 @@
-<html><body>base.html</body></html>
+{% if current_user %}
+❤ MediCita VE Tu salud, clara y accesible
+Buscar especialista Mis citas Portal médico
+{{ current_user.name }}
+{{ current_user.email }}
+Salir
+{% endif %}
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+{% for category, message in messages %}
+{{ message }}
+{% endfor %}
+{% endif %} {% endwith %} {% block content %}{% endblock %}
