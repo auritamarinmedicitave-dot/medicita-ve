@@ -350,7 +350,7 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        if email == "admin@medicitave.com" and password == "Admin123":
+       if email.strip().lower() == "admin@medicitave.com" and password.strip() == "1234":
             return redirect("/admin")
         else:
             return "Correo o contraseña incorrectos"
