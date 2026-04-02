@@ -358,10 +358,8 @@ def login():
         if email == "admin@medicitave.com" and password == "Admin123":
             return redirect("/admin")
 
-        return "Correo o contraseña incorrectos"
-
+   else:
     return render_template("auth.html")
-
 
 @app.route("/admin")
 def admin():
