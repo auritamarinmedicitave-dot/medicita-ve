@@ -1,17 +1,64 @@
-{% extends 'base.html' %} {% block title %}{% if mode == 'register' %}Crear cuenta{% else %}Iniciar sesiÃ³n{% endif %} Â· MediCita VE{% endblock %} {% block content %}
-â¤ MediCita VE Experiencia mÃ©dica moderna para Venezuela
-DiseÃ±o premium inspirado en plataformas lÃ­deres
-Reserva citas mÃ©dicas con una interfaz clara, elegante y confiable.
+{% extends "base.html" %}
 
-Hemos acercado la experiencia visual a un estÃ¡ndar premium de salud digital, manteniendo la identidad y colores de MediCita VE.
+{% block title %}
+  {% if mode == "register" %}Crear cuenta | MediCita VE{% else %}Iniciar sesión | MediCita VE{% endif %}
+{% endblock %}
 
-1.200+Especialistas
-8.500+Citas activas
-98%SatisfacciÃ³n
-Iniciar sesiÃ³n Crear cuenta
-{% if mode == 'register' %}
-Nombre completo   Correo   ContraseÃ±a    Crear cuenta
-{% else %}
-Correo   ContraseÃ±a    Entrar
-{% endif %}
+{% block content %}
+<section class="auth-wrap">
+  <div class="container auth-grid">
+    <div class="auth-side">
+      <span class="eyebrow">MediCita VE</span>
+      <h1>Reserva citas médicas con una interfaz clara, elegante y confiable.</h1>
+      <p>Experiencia premium inspirada en plataformas líderes, adaptada para Venezuela.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <strong>1.200+</strong>
+          <span>Especialistas</span>
+        </div>
+        <div class="stat-card">
+          <strong>8.500+</strong>
+          <span>Citas activas</span>
+        </div>
+        <div class="stat-card">
+          <strong>98%</strong>
+          <span>Satisfacción</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <a class="tab {% if mode != 'register' %}active{% endif %}" href="{{ url_for('login') }}">Iniciar sesión</a>
+        <a class="tab {% if mode == 'register' %}active{% endif %}" href="{{ url_for('register') }}">Crear cuenta</a>
+      </div>
+
+      {% if mode == "register" %}
+      <form method="post" class="form-grid">
+        <label>Nombre completo
+          <input type="text" name="name" placeholder="Nombre y apellido" required>
+        </label>
+        <label>Correo
+          <input type="email" name="email" placeholder="tucorreo@email.com" required>
+        </label>
+        <label>Contraseña
+          <input type="password" name="password" placeholder="********" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Crear cuenta</button>
+      </form>
+      {% else %}
+      <form method="post" class="form-grid">
+        <label>Correo
+          <input type="email" name="email" placeholder="tucorreo@email.com" required>
+        </label>
+        <label>Contraseña
+          <input type="password" name="password" placeholder="********" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endblock %}
