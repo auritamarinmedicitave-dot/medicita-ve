@@ -349,3 +349,20 @@ app = create_app()
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5001"))
     app.run(host="0.0.0.0", port=port, debug=True)
+    @app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if email == "admin@medicitave.com" and password == "Admin123":
+            return redirect("/admin")
+
+        return "Correo o contraseña incorrectos"
+
+    return render_template("auth.html")
+
+
+@app.route("/admin")
+def admin():
+    return "Bienvenida al panel de administrador 🚀"
