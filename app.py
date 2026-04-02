@@ -349,7 +349,7 @@ app = create_app()
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5001"))
     app.run(host="0.0.0.0", port=port, debug=True)
-    @app.route("/login", methods=["GET", "POST"])
+  @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get("email")
@@ -357,8 +357,9 @@ def login():
 
         if email == "admin@medicitave.com" and password == "Admin123":
             return redirect("/admin")
+        else:
+            return "Correo o contraseña incorrectos"
 
-   else:
     return render_template("auth.html")
 
 @app.route("/admin")
