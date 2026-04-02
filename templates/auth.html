@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-  {% if mode == "register" %}Crear cuenta | MediCita VE{% else %}Iniciar sesión | MediCita VE{% endif %}
-{% endblock %}
+{% block title %}Iniciar sesión | MediCita VE{% endblock %}
 
 {% block content %}
 <section class="auth-wrap">
@@ -30,34 +28,21 @@
 
     <div class="auth-card">
       <div class="auth-tabs">
-        <a class="tab {% if mode != 'register' %}active{% endif %}" href="{{ url_for('login') }}">Iniciar sesión</a>
-        <a class="tab {% if mode == 'register' %}active{% endif %}" href="{{ url_for('register') }}">Crear cuenta</a>
+        <a class="tab active" href="{{ url_for('login') }}">Iniciar sesión</a>
+        <a class="tab" href="{{ url_for('register') }}">Crear cuenta</a>
       </div>
 
-      {% if mode == "register" %}
-      <form method="post" class="form-grid">
-        <label>Nombre completo
-          <input type="text" name="name" placeholder="Nombre y apellido" required>
-        </label>
-        <label>Correo
-          <input type="email" name="email" placeholder="tucorreo@email.com" required>
-        </label>
-        <label>Contraseña
-          <input type="password" name="password" placeholder="********" required>
-        </label>
-        <button class="btn btn-primary" type="submit">Crear cuenta</button>
-      </form>
-      {% else %}
       <form method="post" class="form-grid">
         <label>Correo
           <input type="email" name="email" placeholder="tucorreo@email.com" required>
         </label>
+
         <label>Contraseña
           <input type="password" name="password" placeholder="********" required>
         </label>
+
         <button class="btn btn-primary" type="submit">Entrar</button>
       </form>
-      {% endif %}
     </div>
   </div>
 </section>
