@@ -1,49 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Iniciar sesión | MediCita VE{% endblock %}
-
 {% block content %}
-<section class="auth-wrap">
-  <div class="container auth-grid">
-    <div class="auth-side">
-      <span class="eyebrow">MediCita VE</span>
-      <h1>Reserva citas médicas con una interfaz clara, elegante y confiable.</h1>
-      <p>Experiencia premium inspirada en plataformas líderes, adaptada para Venezuela.</p>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <strong>1.200+</strong>
-          <span>Especialistas</span>
-        </div>
-        <div class="stat-card">
-          <strong>8.500+</strong>
-          <span>Citas activas</span>
-        </div>
-        <div class="stat-card">
-          <strong>98%</strong>
-          <span>Satisfacción</span>
-        </div>
-      </div>
-    </div>
+<h2>Iniciar sesión</h2>
 
-    <div class="auth-card">
-      <div class="auth-tabs">
-        <a class="tab active" href="{{ url_for('login') }}">Iniciar sesión</a>
-        <a class="tab" href="{{ url_for('register') }}">Crear cuenta</a>
-      </div>
+<form method="POST" action="/login">
+    <label>Correo:</label><br>
+    <input type="email" name="email" required><br><br>
 
-      <form method="post" class="form-grid">
-        <label>Correo
-          <input type="email" name="email" placeholder="tucorreo@email.com" required>
-        </label>
+    <label>Contraseña:</label><br>
+    <input type="password" name="password" required><br><br>
 
-        <label>Contraseña
-          <input type="password" name="password" placeholder="********" required>
-        </label>
+    <button type="submit">Entrar</button>
+</form>
 
-        <button class="btn btn-primary" type="submit">Entrar</button>
-      </form>
-    </div>
-  </div>
-</section>
 {% endblock %}
