@@ -358,7 +358,7 @@ def login():
 
 @app.route("/admin")
 def admin():
-   
+
     return "Bienvenida al panel de administrador 🚀"
    
     
