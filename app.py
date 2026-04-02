@@ -342,14 +342,9 @@ def create_app() -> Flask:
 
     return app
 
-
 app = create_app()
 
-
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", "5001"))
-    app.run(host="0.0.0.0", port=port, debug=True)
-  @app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get("email")
@@ -359,9 +354,16 @@ def login():
             return redirect("/admin")
         else:
             return "Correo o contraseña incorrectos"
-
     return render_template("auth.html")
 
 @app.route("/admin")
 def admin():
+   
     return "Bienvenida al panel de administrador 🚀"
+   
+    
+  
+if __name__ == "__main__":
+    import os
+    port = int(os.getenv("PORT", "5001"))
+    app.run(host="0.0.0.0", port=port, debug=True)
