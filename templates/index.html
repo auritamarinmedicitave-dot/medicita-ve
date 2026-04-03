@@ -3,96 +3,32 @@
 {% block title %}Inicio · MediCita VE{% endblock %}
 
 {% block content %}
-<section style="padding: 32px 0;">
-  <div style="background: linear-gradient(135deg, #1677FF 0%, #10B7A6 100%); color: white; border-radius: 24px; padding: 32px;">
-    <p style="margin: 0 0 8px; font-size: 14px; opacity: 0.9;">MediCita VE</p>
-    <h1 style="margin: 0 0 12px; font-size: 36px; line-height: 1.1;">Encuentra un especialista y reserva tu cita online</h1>
-    <p style="margin: 0; font-size: 18px; max-width: 760px; opacity: 0.95;">
-      Una experiencia más clara, visual y moderna para buscar médicos, comparar opciones y reservar en pocos pasos.
-    </p>
 
-    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
-      <span style="background: rgba(255,255,255,0.16); padding: 10px 14px; border-radius: 999px;">1.200+ doctores verificados</span>
-      <span style="background: rgba(255,255,255,0.16); padding: 10px 14px; border-radius: 999px;">24/7 online disponible</span>
-      <span style="background: rgba(255,255,255,0.16); padding: 10px 14px; border-radius: 999px;">Reserva en minutos</span>
+<h2>Bienvenida a MediCita VE</h2>
+
+<p>
+Nueva experiencia visual de MediCita VE. Encuentra un especialista y reserva tu cita online.
+</p>
+
+<p>
+Más cercano al estilo visual que quieres, con filtros claros, bloques limpios y una jerarquía premium.
+</p>
+
+<hr>
+
+<h3>Especialistas disponibles</h3>
+
+{% for doctor in doctors %}
+    <div style="margin-bottom:20px;">
+        <strong>{{ doctor.name }}</strong><br>
+        {{ doctor.specialty }} - {{ doctor.city }}<br>
+        ⭐ {{ doctor.rating }}<br>
+        {{ doctor.about }}<br>
+        Próximo horario: {{ doctor.next_slot }}<br>
+        Precio: ${{ doctor.price }}
     </div>
-  </div>
-</section>
+{% else %}
+    <p>No hay especialistas disponibles</p>
+{% endfor %}
 
-<section style="padding-bottom: 24px;">
-  <h2 style="margin: 0 0 12px;">Búsquedas rápidas</h2>
-  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-    {% for item in quick_specialties %}
-      <span style="border: 1px solid #dbe4f0; background: white; padding: 10px 14px; border-radius: 999px;">{{ item }}</span>
-    {% endfor %}
-  </div>
-</section>
-
-<section style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
-  <div>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 16px; flex-wrap: wrap;">
-      <div>
-        <h2 style="margin: 0;">Especialistas disponibles</h2>
-        <p style="margin: 6px 0 0; color: #5b6472;">{{ doctors|length }} resultados encontrados</p>
-      </div>
-    </div>
-
-    {% for doctor in doctors %}
-      <article style="background: white; border: 1px solid #e4e9f2; border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);">
-        <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-          <div style="flex: 1 1 420px;">
-            <p style="margin: 0 0 8px; color: #1677FF; font-weight: 600;">Verificado</p>
-            <h3 style="margin: 0 0 6px;">{{ doctor.name }}</h3>
-            <p style="margin: 0 0 8px; color: #5b6472;">{{ doctor.specialty }}</p>
-            <p style="margin: 0 0 12px;">⭐ {{ '%.1f'|format(doctor.rating) }} · {{ doctor.experience }}</p>
-            <p style="margin: 0 0 14px; color: #334155;">{{ doctor.about }}</p>
-            <p style="margin: 0 0 8px;">📍 {{ doctor.city }} · 🏥 {{ doctor.clinic }}</p>
-            <p style="margin: 0 0 12px;">🗓 {{ doctor.next_slot }}</p>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              {% for item in doctor.mode_list %}
-                <span style="background: #eef6ff; color: #1677FF; padding: 8px 12px; border-radius: 999px; font-size: 14px;">{{ item }}</span>
-              {% endfor %}
-            </div>
-          </div>
-
-          <div style="flex: 0 1 220px; background: #f8fbff; border: 1px solid #e2eefc; border-radius: 18px; padding: 18px;">
-            <p style="margin: 0 0 8px; color: #5b6472;">Consulta desde</p>
-            <p style="margin: 0 0 10px; font-size: 28px; font-weight: 700; color: #0f172a;">${{ doctor.price }}</p>
-            <p style="margin: 0 0 16px; color: #5b6472;">Próximo horario: {{ doctor.next_slot }}</p>
-            <button style="width: 100%; background: #1677FF; color: white; border: none; border-radius: 12px; padding: 12px 16px; font-weight: 600; cursor: pointer;">
-              Reservar
-            </button>
-          </div>
-        </div>
-      </article>
-    {% else %}
-      <div style="background: white; border: 1px solid #e4e9f2; border-radius: 20px; padding: 24px;">
-        <p style="margin: 0;">No se encontraron especialistas con esos filtros.</p>
-      </div>
-    {% endfor %}
-  </div>
-
-  <aside>
-    {% if featured_doctor %}
-      <div style="background: white; border: 1px solid #e4e9f2; border-radius: 20px; padding: 22px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05); position: sticky; top: 24px;">
-        <p style="margin: 0 0 8px; color: #1677FF; font-weight: 700;">Próxima disponibilidad</p>
-        <h3 style="margin: 0 0 8px;">Consulta destacada</h3>
-        <p style="margin: 0 0 16px; color: #5b6472;">Verificada</p>
-
-        <h4 style="margin: 0 0 6px;">{{ featured_doctor.name }}</h4>
-        <p style="margin: 0 0 10px; color: #5b6472;">{{ featured_doctor.specialty }} · {{ featured_doctor.city }}</p>
-
-        <p style="margin: 0 0 8px;">🗓 {{ featured_doctor.next_slot }}</p>
-        <p style="margin: 0 0 8px;">💻 {{ featured_doctor.mode_list|join(' / ') }}</p>
-        <p style="margin: 0 0 16px;">🏥 {{ featured_doctor.clinic }}</p>
-
-        <div style="display: grid; gap: 10px;">
-          <div style="background: #f8fbff; border-radius: 14px; padding: 12px 14px;">1.200+ especialistas</div>
-          <div style="background: #f8fbff; border-radius: 14px; padding: 12px 14px;">8.500+ citas al mes</div>
-          <div style="background: #f8fbff; border-radius: 14px; padding: 12px 14px;">98% satisfacción</div>
-        </div>
-      </div>
-    {% endif %}
-  </aside>
-</section>
 {% endblock %}
