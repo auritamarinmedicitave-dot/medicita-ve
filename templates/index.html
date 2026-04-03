@@ -27,7 +27,7 @@ Más cercano al estilo visual que quieres, con filtros claros, bloques limpios y
         Próximo horario: {{ doctor.next_slot }}<br>
         Precio: ${{ doctor.price }}
     </div>
-{% else %}
+{% empty %}
     <p>No hay especialistas disponibles</p>
 {% endfor %}
 
