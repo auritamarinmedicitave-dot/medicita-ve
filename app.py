@@ -341,27 +341,3 @@ def create_app() -> Flask:
         seed_database()
 
     return app
-app = create_app()
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        email = request.form.get("email", "")
-        password = request.form.get("password", "")
-
-        if email.strip().lower() == "admin@medicitave.com" and password.strip() == "1234":
-            return redirect("/admin")
-        else:
-            return "Correo o contraseña incorrectos"
-
-    return render_template("auth.html")
-
-@app.route("/admin")
-def admin():
-    return "Bienvenida al panel de administrador 🚀"
-
-
-if __name__ == "__main__":
-    import os
-    port = int(os.getenv("PORT", "5001"))
-    app.run(host="0.0.0.0", port=port, debug=True)
