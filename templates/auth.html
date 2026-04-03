@@ -1,17 +1,97 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if mode == 'register' %}
+        Crear cuenta · MediCita VE
+    {% else %}
+        Iniciar sesión · MediCita VE
+    {% endif %}
+{% endblock %}
 
 {% block content %}
+<section style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: stretch; min-height: 72vh;">
+    <div style="background: linear-gradient(135deg, #1677FF 0%, #10B7A6 100%); border-radius: 28px; padding: 36px; color: white; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+            <p style="margin:0 0 10px; font-size:14px; opacity:.9;">MediCita VE</p>
+            <h1 style="margin:0 0 14px; font-size:42px; line-height:1.05;">Tu salud, organizada en un solo lugar</h1>
+            <p style="margin:0; font-size:18px; line-height:1.6; max-width:560px; opacity:.95;">
+                Reserva citas, consulta especialistas y gestiona tu atención médica con una experiencia más clara, moderna y confiable.
+            </p>
+        </div>
 
-<h2>Iniciar sesión</h2>
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px;">
+            <div style="background: rgba(255,255,255,0.14); border-radius: 20px; padding: 18px;">
+                <strong style="display:block; font-size:26px;">1.200+</strong>
+                <span style="font-size:14px;">Especialistas</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.14); border-radius: 20px; padding: 18px;">
+                <strong style="display:block; font-size:26px;">8.500+</strong>
+                <span style="font-size:14px;">Citas activas</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.14); border-radius: 20px; padding: 18px;">
+                <strong style="display:block; font-size:26px;">98%</strong>
+                <span style="font-size:14px;">Satisfacción</span>
+            </div>
+        </div>
+    </div>
 
-<form method="POST">
-    <label>Correo:</label><br>
-    <input type="email" name="email" required><br><br>
+    <div style="background:white; border:1px solid #e4e9f2; border-radius: 28px; padding: 28px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06); display:flex; flex-direction:column; justify-content:center;">
+        <div style="display:flex; gap:10px; margin-bottom:24px;">
+            <a href="{{ url_for('login') }}"
+               style="flex:1; text-align:center; padding:12px 14px; border-radius: 14px; font-weight:700; border:1px solid #e4e9f2; background:{% if mode != 'register' %}#1677FF{% else %}#fff{% endif %}; color:{% if mode != 'register' %}#fff{% else %}#0f172a{% endif %};">
+                Iniciar sesión
+            </a>
+            <a href="{{ url_for('register') }}"
+               style="flex:1; text-align:center; padding:12px 14px; border-radius: 14px; font-weight:700; border:1px solid #e4e9f2; background:{% if mode == 'register' %}#1677FF{% else %}#fff{% endif %}; color:{% if mode == 'register' %}#fff{% else %}#0f172a{% endif %};">
+                Crear cuenta
+            </a>
+        </div>
 
-    <label>Contraseña:</label><br>
-    <input type="password" name="password" required><br><br>
+        {% if mode == 'register' %}
+            <form method="post" style="display:grid; gap:16px;">
+                <div>
+                    <label style="display:block; font-weight:600; margin-bottom:8px;">Nombre completo</label>
+                    <input type="text" name="name" placeholder="Nombre y apellido" required
+                           style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid #dbe4f0; background:#fff;">
+                </div>
 
-    <button type="submit">Entrar</button>
-</form>
+                <div>
+                    <label style="display:block; font-weight:600; margin-bottom:8px;">Correo</label>
+                    <input type="email" name="email" placeholder="tucorreo@email.com" required
+                           style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid #dbe4f0; background:#fff;">
+                </div>
 
+                <div>
+                    <label style="display:block; font-weight:600; margin-bottom:8px;">Contraseña</label>
+                    <input type="password" name="password" placeholder="********" required
+                           style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid #dbe4f0; background:#fff;">
+                </div>
+
+                <button type="submit"
+                        style="margin-top:6px; border:none; background:#1677FF; color:white; padding:14px 18px; border-radius:14px; font-weight:700; cursor:pointer;">
+                    Crear cuenta
+                </button>
+            </form>
+        {% else %}
+            <form method="post" style="display:grid; gap:16px;">
+                <div>
+                    <label style="display:block; font-weight:600; margin-bottom:8px;">Correo</label>
+                    <input type="email" name="email" placeholder="tucorreo@email.com" required
+                           style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid #dbe4f0; background:#fff;">
+                </div>
+
+                <div>
+                    <label style="display:block; font-weight:600; margin-bottom:8px;">Contraseña</label>
+                    <input type="password" name="password" placeholder="********" required
+                           style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid #dbe4f0; background:#fff;">
+                </div>
+
+                <button type="submit"
+                        style="margin-top:6px; border:none; background:#1677FF; color:white; padding:14px 18px; border-radius:14px; font-weight:700; cursor:pointer;">
+                    Entrar
+                </button>
+            </form>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}
