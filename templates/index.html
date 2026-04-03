@@ -1,50 +1,82 @@
-{% extends 'base.html' %} {% block title %}Inicio Â· MediCita VE{% endblock %} {% block content %}
-Nueva experiencia visual de MediCita VE
-Encuentra un especialista y reserva tu cita online.
+{% extends 'base.html' %}
 
-MÃ¡s cercano al estilo visual que querÃ­as, con filtros claros, bloques limpios y una jerarquÃ­a premium.
+{% block title %}Inicio · MediCita VE{% endblock %}
 
-1.200+Doctores verificados
-24/7Online disponible
-2 minTiempo promedio
-      Buscar
-{% for item in quick_specialties %} {{ item }} {% endfor %}
-Especialistas disponibles
+{% block content %}
 
-MÃ¡s limpio, mÃ¡s visual y mÃ¡s cercano a la referencia que querÃ­as.
+<h2>Nueva experiencia visual de MediCita VE</h2>
+<p>Encuentra un especialista y reserva tu cita online.</p>
 
-{{ doctors|length }} resultados
+<p>
+Más cercano al estilo visual que quieres, con filtros claros, bloques limpios y una jerarquía premium.
+</p>
+
+<ul>
+  <li>1.200+ Doctores verificados</li>
+  <li>24/7 Online disponible</li>
+  <li>2 min Tiempo promedio</li>
+</ul>
+
+<button>Buscar</button>
+
+<div>
+  {% for item in quick_specialties %}
+    <span>{{ item }}</span>
+  {% endfor %}
+</div>
+
+<h3>Especialistas disponibles</h3>
+
+<p>Más limpio, más visual y más cercano a la referencia que quieres.</p>
+
+<p>{{ doctors|length }} resultados</p>
+
 {% for doctor in doctors %}
-âœš
-{{ doctor.name }}
+<div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+  <h4>{{ doctor.name }}</h4>
+  <p>{{ doctor.specialty }}</p>
 
-{{ doctor.specialty }}
+  <p>⭐ {{ '%.1f'|format(doctor.rating) }}</p>
 
-â˜… {{ '%.1f'|format(doctor.rating) }}
-{% for item in doctor.mode_list %}{{ item }}{% endfor %} {{ doctor.experience }} Verificado
-{{ doctor.about }}
+  <p>
+    {% for item in doctor.mode_list %}
+      {{ item }}
+    {% endfor %}
+  </p>
 
-ðŸ“ {{ doctor.city }} ðŸ¥ {{ doctor.clinic }} ðŸ—“ {{ doctor.next_slot }} ðŸ›¡ Perfil profesional
-Consulta desde ${{ doctor.price }} PrÃ³ximo horario {{ doctor.next_slot }}
-      Reservar
+  <p>{{ doctor.experience }} · Verificado</p>
+
+  <p>{{ doctor.about }}</p>
+
+  <p>📍 {{ doctor.city }} | 🏥 {{ doctor.clinic }}</p>
+  <p>🗓 {{ doctor.next_slot }}</p>
+
+  <p>Consulta desde ${{ doctor.price }}</p>
+
+  <button>Reservar</button>
+</div>
+
 {% else %}
-No se encontraron especialistas con esos filtros.
+<p>No se encontraron especialistas con esos filtros.</p>
 {% endfor %}
+
 {% if featured_doctor %}
-PrÃ³xima disponibilidad
-Consulta destacada
+<h3>Próxima disponibilidad</h3>
 
-Verificada
-âœš
-{{ featured_doctor.name }}
+<div style="border:2px solid #1677FF; padding:15px;">
+  <p>Consulta destacada · Verificada</p>
 
-{{ featured_doctor.specialty }} Â· {{ featured_doctor.city }}
+  <h4>{{ featured_doctor.name }}</h4>
+  <p>{{ featured_doctor.specialty }} · {{ featured_doctor.city }}</p>
 
-ðŸ—“ {{ featured_doctor.next_slot }}
-ðŸ’» {{ featured_doctor.mode_list|join(' / ') }}
-ðŸ¥ {{ featured_doctor.clinic }}
-1.200+Especialistas
-8.500+Citas al mes
-98%SatisfacciÃ³n
+  <p>🗓 {{ featured_doctor.next_slot }}</p>
+  <p>💻 {{ featured_doctor.mode_list|join(' / ') }}</p>
+  <p>🏥 {{ featured_doctor.clinic }}</p>
+
+  <p>1.200+ Especialistas</p>
+  <p>8.500+ Citas al mes</p>
+  <p>98% Satisfacción</p>
+</div>
 {% endif %}
+
 {% endblock %}
