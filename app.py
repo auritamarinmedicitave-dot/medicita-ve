@@ -347,16 +347,16 @@ app = create_app()
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+        email = request.form.get("email", "")
+        password = request.form.get("password", "")
 
-       if email.strip().lower() == "admin@medicitave.com" and password.strip() == "1234":
+        if email.strip().lower() == "admin@medicitave.com" and password.strip() == "1234":
             return redirect("/admin")
         else:
             return "Correo o contraseña incorrectos"
+
     return render_template("auth.html")
 
 @app.route("/admin")
 def admin():
-
     return "Bienvenida al panel de administrador 🚀"
